@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K CLUB 训练计划安排</title>
+    <style>
+        :root {
+            --bg: #0a0f18;
+            --panel: #121b2b;
+            --line: #2a3b57;
+            --text: #e6edf7;
+            --muted: #9db0c7;
+            --energy: #00b7ff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Rajdhani", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 16%, rgba(0, 183, 255, 0.18), transparent 38%),
+                linear-gradient(180deg, #070b12 0%, #0a0f18 50%, #0d1422 100%);
+            padding: 24px;
+        }
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(18, 27, 43, 0.95), rgba(15, 23, 38, 0.95));
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            letter-spacing: 1px;
+        }
+        .sub {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 183, 255, 0.28);
+            background: #111a2a;
+        }
+        thead {
+            background: linear-gradient(90deg, #0b74cc, #0a92e8);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(42, 59, 87, 0.75);
+        }
+        .actions {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(0, 183, 255, 0.7);
+            color: #f3fbff;
+            background: linear-gradient(135deg, #00b7ff, #0077ff);
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <h1>K CLUB 训练计划安排</h1>
+        <p class="sub">按周规划机器人比赛训练任务，可根据赛事节点动态调整。</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>周期</th>
+                    <th>训练主题</th>
+                    <th>目标</th>
+                    <th>负责人</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>第1周</td>
+                    <td>底盘与路径</td>
+                    <td>完成自动期稳定跑分</td>
+                    <td>机械组</td>
+                </tr>
+                <tr>
+                    <td>第2周</td>
+                    <td>遥控期协作</td>
+                    <td>双机协同与分工磨合</td>
+                    <td>战术组</td>
+                </tr>
+                <tr>
+                    <td>第3周</td>
+                    <td>联盟模拟赛</td>
+                    <td>提升联盟胜率与应变</td>
+                    <td>全队</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="actions">
+            <a class="btn" href="index.html">返回上级网页</a>
+            <a class="btn" href="analysis.html">进入数据分析平台</a>
+        </div>
+    </main>
+</body>
+</html>
