@@ -1,0 +1,64 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Alpha Robotics",
+      "totalScore": 2850,
+      "matches": 12,
+      "highestScore": 385
+    },
+    {
+      "id": 2,
+      "name": "Beta Team",
+      "totalScore": 2560,
+      "matches": 10,
+      "highestScore": 340
+    },
+    {
+      "id": 3,
+      "name": "Gamma Force",
+      "totalScore": 2340,
+      "matches": 9,
+      "highestScore": 310
+    }
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "teamName": "Alpha Robotics",
+      "score": 385,
+      "category": "auto",
+      "date": "2026-04-01",
+      "details": {
+        "auto": 95,
+        "tele": 180,
+        "endgame": 110
+      }
+    },
+    {
+      "id": 2,
+      "teamName": "Beta Team",
+      "score": 340,
+      "category": "tele",
+      "date": "2026-04-01",
+      "details": {
+        "auto": 80,
+        "tele": 160,
+        "endgame": 100
+      }
+    },
+    {
+      "id": 3,
+      "teamName": "Gamma Force",
+      "score": 310,
+      "category": "endgame",
+      "date": "2026-04-02",
+      "details": {
+        "auto": 75,
+        "tele": 150,
+        "endgame": 85
+      }
+    }
+  ],
+  "exportDate": "2026-04-08"
+}

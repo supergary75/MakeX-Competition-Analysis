@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K CLUB 规则分析功能建设</title>
+    <style>
+        :root {
+            --bg: #0a0f18;
+            --panel: #121b2b;
+            --line: #2a3b57;
+            --text: #e6edf7;
+            --muted: #9db0c7;
+            --energy: #00b7ff;
+            --ok: #22c55e;
+            --warn: #f59e0b;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Rajdhani", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 16%, rgba(0, 183, 255, 0.18), transparent 38%),
+                linear-gradient(180deg, #070b12 0%, #0a0f18 50%, #0d1422 100%);
+            padding: 24px;
+        }
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            border: 1px solid rgba(0, 183, 255, 0.32);
+            border-radius: 16px;
+            background: linear-gradient(180deg, rgba(18, 27, 43, 0.96), rgba(15, 23, 38, 0.96));
+            padding: 24px;
+        }
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            letter-spacing: 1px;
+        }
+        .sub {
+            margin: 0 0 18px;
+            color: var(--muted);
+        }
+        .grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            margin-bottom: 18px;
+        }
+        .card {
+            border: 1px solid rgba(0, 183, 255, 0.22);
+            border-radius: 12px;
+            padding: 14px;
+            background: rgba(17, 26, 42, 0.88);
+        }
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 1.15rem;
+        }
+        .badge {
+            display: inline-block;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            margin-bottom: 8px;
+            border: 1px solid transparent;
+        }
+        .badge.todo {
+            color: #fde68a;
+            background: rgba(245, 158, 11, 0.18);
+            border-color: rgba(245, 158, 11, 0.45);
+        }
+        .badge.ready {
+            color: #bbf7d0;
+            background: rgba(34, 197, 94, 0.18);
+            border-color: rgba(34, 197, 94, 0.45);
+        }
+        .panel {
+            border: 1px solid rgba(0, 183, 255, 0.28);
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(17, 26, 42, 0.9);
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #cde1f7;
+        }
+        textarea, input {
+            width: 100%;
+            background: #0f1a2d;
+            color: #e6edf7;
+            border: 1px solid #36527a;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 1rem;
+        }
+        textarea { min-height: 110px; resize: vertical; }
+        .row {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(0, 183, 255, 0.7);
+            color: #f3fbff;
+            background: linear-gradient(135deg, #00b7ff, #0077ff);
+            cursor: pointer;
+        }
+        .btn.secondary {
+            background: linear-gradient(135deg, #2a3347, #1a2538);
+            border-color: #405371;
+        }
+        .doc-list {
+            margin-top: 12px;
+            display: grid;
+            gap: 10px;
+        }
+        .doc-item {
+            border: 1px solid rgba(0, 183, 255, 0.22);
+            border-radius: 10px;
+            padding: 10px 12px;
+            background: rgba(15, 26, 45, 0.85);
+        }
+        .doc-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .doc-meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+        .empty-tip {
+            color: var(--muted);
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <h1>K CLUB 规则分析功能建设（二级页面）</h1>
+        <p class="sub">该页面用于开始规则分析模块建设：先定义需求、再录入规则、最后输出策略草案。</p>
+
+        <section class="grid">
+            <article class="card">
+                <span class="badge ready">已就绪（可用）</span>
+                <h2>需求定义</h2>
+                <p>明确赛季规则版本、目标赛项、产出格式（训练建议/比赛清单），并可添加比赛规则文档。</p>
+            </article>
+            <article class="card">
+                <span class="badge todo">待建设</span>
+                <h2>规则条目库</h2>
+                <p>将计分项、犯规项、触发条件拆成结构化条目，支持查询。</p>
+            </article>
+            <article class="card">
+                <span class="badge todo">待建设</span>
+                <h2>场景模拟器</h2>
+                <p>输入联盟配置与任务路径，输出预期得分、风险与替代策略。</p>
+            </article>
+            <article class="card">
+                <span class="badge todo">待建设</span>
+                <h2>策略输出</h2>
+                <p>生成训练清单、比赛流程卡、裁判关注点提示。</p>
+            </article>
+        </section>
+
+        <section class="panel">
+            <h2>启动配置</h2>
+            <div class="row">
+                <div>
+                    <label for="seasonRule">规则版本</label>
+                    <input id="seasonRule" type="text" placeholder="例如：2026 MakeX R1" />
+                </div>
+                <div>
+                    <label for="targetGame">目标赛项</label>
+                    <input id="targetGame" type="text" placeholder="例如：联盟对抗赛" />
+                </div>
+            </div>
+            <div style="margin-top: 12px;">
+                <label for="goalText">建设目标</label>
+                <textarea id="goalText" placeholder="填写你希望本阶段实现的功能，例如：支持规则条目录入、输出风险清单、生成训练建议。"></textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" id="saveConfigBtn" type="button">保存启动配置</button>
+                <button class="btn secondary" id="clearConfigBtn" type="button">清空</button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>比赛规则文档</h2>
+            <div class="row">
+                <div>
+                    <label for="ruleDocFile">上传规则文档（记录文件信息）</label>
+                    <input id="ruleDocFile" type="file" accept=".pdf,.doc,.docx,.txt,.md,.png,.jpg,.jpeg" />
+                </div>
+                <div>
+                    <label for="ruleDocLink">在线文档链接（可选）</label>
+                    <input id="ruleDocLink" type="text" placeholder="例如：https://example.com/makex-rules" />
+                </div>
+            </div>
+            <div style="margin-top: 12px;">
+                <label for="ruleDocName">文档名称</label>
+                <input id="ruleDocName" type="text" placeholder="例如：2026赛季规则手册（正式版）" />
+            </div>
+            <div style="margin-top: 12px;">
+                <label for="ruleDocRemark">备注（可选）</label>
+                <textarea id="ruleDocRemark" placeholder="例如：重点关注自动期扣分条款、联盟选队限制。"></textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" id="addRuleDocBtn" type="button">添加规则文档</button>
+            </div>
+            <div id="ruleDocList" class="doc-list">
+                <p class="empty-tip">暂无规则文档，请先添加。</p>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>当前状态</h2>
+            <p id="statusText" style="color: var(--muted); margin: 0;">尚未保存配置。</p>
+        </section>
+
+        <div class="actions">
+            <a class="btn secondary" href="rules-analysis.html">返回规则分析页</a>
+            <a class="btn secondary" href="index.html">返回上级网页</a>
+            <a class="btn secondary" href="analysis.html">进入数据分析平台</a>
+        </div>
+    </main>
+
+    <script>
+        const STORAGE_KEY = 'kclub_rules_builder_config';
+        const RULE_DOCS_KEY = 'kclub_rules_documents';
+
+        function loadRuleDocs() {
+            const raw = localStorage.getItem(RULE_DOCS_KEY);
+            if (!raw) return [];
+            try {
+                const docs = JSON.parse(raw);
+                return Array.isArray(docs) ? docs : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveRuleDocs(docs) {
+            localStorage.setItem(RULE_DOCS_KEY, JSON.stringify(docs));
+        }
+
+        function renderRuleDocs() {
+            const container = document.getElementById('ruleDocList');
+            const docs = loadRuleDocs();
+            if (!docs.length) {
+                container.innerHTML = '<p class="empty-tip">暂无规则文档，请先添加。</p>';
+                return;
+            }
+
+            container.innerHTML = docs.map((doc, idx) => {
+                const sourceText = doc.link
+                    ? `在线文档：${doc.link}`
+                    : `本地文件：${doc.fileName || '未命名文件'}${doc.fileSize ? ` (${doc.fileSize})` : ''}`;
+
+                return `
+                    <div class="doc-item">
+                        <div class="doc-title">${doc.name || '未命名文档'}</div>
+                        <div class="doc-meta">${sourceText}</div>
+                        <div class="doc-meta">备注：${doc.remark || '无'}</div>
+                        <div class="doc-meta">添加时间：${doc.createdAt || '-'}</div>
+                        <button class="btn secondary" type="button" onclick="removeRuleDoc(${idx})">删除</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function formatFileSize(size) {
+            if (!size && size !== 0) return '';
+            if (size < 1024) return `${size} B`;
+            if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+            return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+        }
+
+        function addRuleDoc() {
+            const fileEl = document.getElementById('ruleDocFile');
+            const linkEl = document.getElementById('ruleDocLink');
+            const nameEl = document.getElementById('ruleDocName');
+            const remarkEl = document.getElementById('ruleDocRemark');
+
+            const file = fileEl.files && fileEl.files[0] ? fileEl.files[0] : null;
+            const link = linkEl.value.trim();
+            const name = nameEl.value.trim() || (file ? file.name : (link ? '在线规则文档' : ''));
+            const remark = remarkEl.value.trim();
+
+            if (!file && !link) {
+                document.getElementById('statusText').textContent = '请上传文档文件或填写在线链接。';
+                return;
+            }
+
+            const docs = loadRuleDocs();
+            docs.unshift({
+                name,
+                remark,
+                link,
+                fileName: file ? file.name : '',
+                fileType: file ? (file.type || '') : '',
+                fileSize: file ? formatFileSize(file.size) : '',
+                createdAt: new Date().toLocaleString('zh-CN')
+            });
+
+            saveRuleDocs(docs);
+            fileEl.value = '';
+            linkEl.value = '';
+            nameEl.value = '';
+            remarkEl.value = '';
+            renderRuleDocs();
+            document.getElementById('statusText').textContent = '规则文档已添加。';
+        }
+
+        function removeRuleDoc(index) {
+            const docs = loadRuleDocs();
+            docs.splice(index, 1);
+            saveRuleDocs(docs);
+            renderRuleDocs();
+            document.getElementById('statusText').textContent = '规则文档已删除。';
+        }
+
+        window.removeRuleDoc = removeRuleDoc;
+
+        function loadConfig() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            try {
+                const data = JSON.parse(raw);
+                document.getElementById('seasonRule').value = data.seasonRule || '';
+                document.getElementById('targetGame').value = data.targetGame || '';
+                document.getElementById('goalText').value = data.goalText || '';
+                document.getElementById('statusText').textContent = `已加载配置：${data.seasonRule || '未命名版本'} / ${data.targetGame || '未定义赛项'}`;
+            } catch (e) {
+                document.getElementById('statusText').textContent = '配置读取失败，请重新填写。';
+            }
+        }
+
+        function saveConfig() {
+            const payload = {
+                seasonRule: document.getElementById('seasonRule').value.trim(),
+                targetGame: document.getElementById('targetGame').value.trim(),
+                goalText: document.getElementById('goalText').value.trim(),
+                updatedAt: new Date().toISOString()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+            document.getElementById('statusText').textContent = `已保存配置：${payload.seasonRule || '未命名版本'} / ${payload.targetGame || '未定义赛项'}`;
+        }
+
+        function clearConfig() {
+            localStorage.removeItem(STORAGE_KEY);
+            document.getElementById('seasonRule').value = '';
+            document.getElementById('targetGame').value = '';
+            document.getElementById('goalText').value = '';
+            document.getElementById('statusText').textContent = '配置已清空。';
+        }
+
+        document.getElementById('saveConfigBtn').addEventListener('click', saveConfig);
+        document.getElementById('clearConfigBtn').addEventListener('click', clearConfig);
+        document.getElementById('addRuleDocBtn').addEventListener('click', addRuleDoc);
+        loadConfig();
+        renderRuleDocs();
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K CLUB MakeX机器人比赛处理平台</title>
+    <style>
+        :root {
+            --bg: #0a0f18;
+            --panel: #121b2b;
+            --line: #2a3b57;
+            --text: #e6edf7;
+            --muted: #9db0c7;
+            --energy: #00b7ff;
+            --steel: #a7b8d6;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Rajdhani", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 16%, rgba(0, 183, 255, 0.18), transparent 38%),
+                radial-gradient(circle at 86% 18%, rgba(167, 184, 214, 0.16), transparent 34%),
+                linear-gradient(180deg, #070b12 0%, #0a0f18 50%, #0d1422 100%);
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .shell {
+            width: min(920px, 100%);
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            background: linear-gradient(180deg, rgba(18, 27, 43, 0.95), rgba(15, 23, 38, 0.95));
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+            overflow: hidden;
+        }
+
+        .hero {
+            padding: 36px 28px;
+            border-bottom: 1px solid var(--line);
+            background: linear-gradient(140deg, rgba(0, 183, 255, 0.2), rgba(18, 27, 43, 0.9) 45%, rgba(167, 184, 214, 0.2));
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .content {
+            padding: 28px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .card {
+            border: 1px solid rgba(167, 184, 214, 0.28);
+            border-radius: 12px;
+            background: rgba(17, 26, 42, 0.9);
+            padding: 20px;
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 1.35rem;
+        }
+
+        .actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            color: #f3fbff;
+            background: linear-gradient(135deg, #00b7ff, #0077ff);
+            border-color: rgba(0, 183, 255, 0.75);
+        }
+
+        .btn-secondary {
+            color: #dbe8f8;
+            background: linear-gradient(135deg, #2a3347, #1a2538);
+            border-color: #405371;
+        }
+
+        ul {
+            margin: 10px 0 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <h1>K CLUB MakeX机器人比赛处理平台</h1>
+            <p>上级导航主页</p>
+        </section>
+        <section class="content">
+            <article class="card">
+                <h2>数据分析平台</h2>
+                <p>进入主系统进行联盟赛导入、EPA分析、排行榜与淘汰赛预测。</p>
+                <div class="actions">
+                    <a class="btn btn-primary" href="analysis.html">进入分析平台</a>
+                    <a class="btn btn-secondary" href="data/sample.json">查看示例数据</a>
+                </div>
+            </article>
+            <article class="card">
+                <h2>训练计划安排</h2>
+                <p>进入训练任务规划页面，按周期安排技术训练、模拟赛和复盘目标。</p>
+                <div class="actions">
+                    <a class="btn btn-primary" href="training-plan.html">进入训练计划</a>
+                </div>
+            </article>
+            <article class="card">
+                <h2>比赛规则分析</h2>
+                <p>进入规则分析页面，快速查看计分逻辑、犯规风险与联盟战术约束。</p>
+                <div class="actions">
+                    <a class="btn btn-primary" href="rules-analysis.html">进入规则分析</a>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

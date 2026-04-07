@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K CLUB 比赛规则分析</title>
+    <style>
+        :root {
+            --bg: #0a0f18;
+            --panel: #121b2b;
+            --line: #2a3b57;
+            --text: #e6edf7;
+            --muted: #9db0c7;
+            --energy: #00b7ff;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Rajdhani", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 16%, rgba(0, 183, 255, 0.18), transparent 38%),
+                linear-gradient(180deg, #070b12 0%, #0a0f18 50%, #0d1422 100%);
+            padding: 24px;
+        }
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(18, 27, 43, 0.95), rgba(15, 23, 38, 0.95));
+            border: 1px solid rgba(0, 183, 255, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            letter-spacing: 1px;
+        }
+        .sub {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+        .grid {
+            display: grid;
+            gap: 14px;
+        }
+        .row {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+        }
+        .card {
+            border: 1px solid rgba(0, 183, 255, 0.25);
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(17, 26, 42, 0.9);
+        }
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+        .card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+        }
+        .actions {
+            margin-top: 16px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .doc-list {
+            margin-top: 12px;
+            display: grid;
+            gap: 10px;
+        }
+        .doc-item {
+            border: 1px solid rgba(0, 183, 255, 0.25);
+            border-radius: 10px;
+            padding: 10px 12px;
+            background: rgba(15, 26, 45, 0.85);
+        }
+        .doc-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .doc-meta {
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-bottom: 6px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #cde1f7;
+        }
+        input, select, textarea {
+            width: 100%;
+            background: #0f1a2d;
+            color: #e6edf7;
+            border: 1px solid #36527a;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 1rem;
+        }
+        textarea { min-height: 88px; resize: vertical; }
+        .empty-tip {
+            color: var(--muted);
+            margin: 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(0, 183, 255, 0.7);
+            color: #f3fbff;
+            background: linear-gradient(135deg, #00b7ff, #0077ff);
+        }
+        .btn.secondary {
+            background: linear-gradient(135deg, #2a3347, #1a2538);
+            border-color: #405371;
+        }
+        @media (max-width: 768px) {
+            .row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <h1>K CLUB 比赛规则分析</h1>
+        <p class="sub">选择 MakeX 赛项，并在本地添加相关规则文档，作为后续规则分析基础。</p>
+
+        <section class="card">
+            <h2>MakeX赛项选择</h2>
+            <div class="row">
+                <div>
+                    <label for="eventSelect">选择赛项</label>
+                    <select id="eventSelect">
+                        <option value="">请选择赛项</option>
+                        <option value="MakeX Starter">MakeX Starter</option>
+                        <option value="MakeX Challenge">MakeX Challenge</option>
+                        <option value="MakeX Explorer">MakeX Explorer</option>
+                        <option value="MakeX Inspire">MakeX Inspire</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="customEventInput">或自定义赛项</label>
+                    <input id="customEventInput" type="text" placeholder="例如：MakeX 2026 联盟赛" />
+                </div>
+            </div>
+            <div class="actions">
+                <button class="btn" type="button" id="saveEventBtn">保存当前赛项</button>
+            </div>
+            <p id="selectedEventText" class="doc-meta" style="margin-top: 8px;">当前未选择赛项。</p>
+        </section>
+
+        <section class="card" style="margin-top: 14px;">
+            <h2>本地规则文档添加</h2>
+            <div class="row">
+                <div>
+                    <label for="ruleFileInput">选择本地文件</label>
+                    <input id="ruleFileInput" type="file" accept=".pdf,.doc,.docx,.txt,.md,.png,.jpg,.jpeg" />
+                </div>
+                <div>
+                    <label for="ruleDocName">文档名称（可选）</label>
+                    <input id="ruleDocName" type="text" placeholder="默认使用文件名" />
+                </div>
+            </div>
+            <div style="margin-top: 12px;">
+                <label for="ruleDocRemark">备注（可选）</label>
+                <textarea id="ruleDocRemark" placeholder="例如：重点关注犯规条款与计分边界"></textarea>
+            </div>
+            <div class="actions">
+                <button class="btn" type="button" id="addRuleDocBtn">添加规则文档</button>
+            </div>
+            <div id="docList" class="doc-list">
+                <p class="empty-tip">暂无文档，请先选择赛项并添加本地规则文档。</p>
+            </div>
+        </section>
+
+        <div class="actions">
+            <a class="btn secondary" href="rules-analysis-builder.html">进入功能建设（二级页）</a>
+            <a class="btn secondary" href="index.html">返回上级网页</a>
+            <a class="btn secondary" href="analysis.html">进入数据分析平台</a>
+        </div>
+    </main>
+
+    <script>
+        const EVENT_KEY = 'kclub_selected_event';
+        const DOC_KEY = 'kclub_event_rule_docs';
+
+        function getSelectedEvent() {
+            return localStorage.getItem(EVENT_KEY) || '';
+        }
+
+        function setSelectedEvent(name) {
+            localStorage.setItem(EVENT_KEY, name);
+        }
+
+        function getDocs() {
+            const raw = localStorage.getItem(DOC_KEY);
+            if (!raw) return [];
+            try {
+                const parsed = JSON.parse(raw);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (_) {
+                return [];
+            }
+        }
+
+        function saveDocs(docs) {
+            localStorage.setItem(DOC_KEY, JSON.stringify(docs));
+        }
+
+        function formatFileSize(size) {
+            if (size < 1024) return `${size} B`;
+            if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+            return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+        }
+
+        function renderEvent() {
+            const current = getSelectedEvent();
+            document.getElementById('selectedEventText').textContent = current
+                ? `当前赛项：${current}`
+                : '当前未选择赛项。';
+        }
+
+        function renderDocs() {
+            const current = getSelectedEvent();
+            const listEl = document.getElementById('docList');
+            const docs = getDocs().filter((d) => d.eventName === current);
+
+            if (!current) {
+                listEl.innerHTML = '<p class="empty-tip">请先保存赛项，再添加文档。</p>';
+                return;
+            }
+
+            if (!docs.length) {
+                listEl.innerHTML = `<p class="empty-tip">赛项 ${current} 暂无规则文档。</p>`;
+                return;
+            }
+
+            listEl.innerHTML = docs.map((doc) => `
+                <div class="doc-item">
+                    <div class="doc-title">${doc.docName}</div>
+                    <div class="doc-meta">文件：${doc.fileName} (${doc.fileSize})</div>
+                    <div class="doc-meta">备注：${doc.remark || '无'}</div>
+                    <div class="doc-meta">添加时间：${doc.createdAt}</div>
+                    <button class="btn secondary" type="button" onclick="removeDoc('${doc.id}')">删除</button>
+                </div>
+            `).join('');
+        }
+
+        function saveEventFromInputs() {
+            const selectVal = document.getElementById('eventSelect').value.trim();
+            const customVal = document.getElementById('customEventInput').value.trim();
+            const finalName = customVal || selectVal;
+            if (!finalName) {
+                document.getElementById('selectedEventText').textContent = '请先选择或输入赛项名称。';
+                return;
+            }
+            setSelectedEvent(finalName);
+            renderEvent();
+            renderDocs();
+        }
+
+        function addRuleDoc() {
+            const current = getSelectedEvent();
+            if (!current) {
+                document.getElementById('selectedEventText').textContent = '请先保存赛项，再添加文档。';
+                return;
+            }
+
+            const fileInput = document.getElementById('ruleFileInput');
+            const file = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
+            if (!file) {
+                document.getElementById('selectedEventText').textContent = '请选择本地规则文档文件。';
+                return;
+            }
+
+            const docNameInput = document.getElementById('ruleDocName').value.trim();
+            const remark = document.getElementById('ruleDocRemark').value.trim();
+
+            const docs = getDocs();
+            docs.unshift({
+                id: `${Date.now()}_${Math.random().toString(16).slice(2, 8)}`,
+                eventName: current,
+                docName: docNameInput || file.name,
+                fileName: file.name,
+                fileType: file.type || '',
+                fileSize: formatFileSize(file.size || 0),
+                remark,
+                createdAt: new Date().toLocaleString('zh-CN')
+            });
+
+            saveDocs(docs);
+            fileInput.value = '';
+            document.getElementById('ruleDocName').value = '';
+            document.getElementById('ruleDocRemark').value = '';
+            renderDocs();
+        }
+
+        function removeDoc(id) {
+            const docs = getDocs().filter((d) => d.id !== id);
+            saveDocs(docs);
+            renderDocs();
+        }
+
+        window.removeDoc = removeDoc;
+
+        (function init() {
+            const current = getSelectedEvent();
+            if (current) {
+                document.getElementById('customEventInput').value = current;
+            }
+            document.getElementById('saveEventBtn').addEventListener('click', saveEventFromInputs);
+            document.getElementById('addRuleDocBtn').addEventListener('click', addRuleDoc);
+            renderEvent();
+            renderDocs();
+        })();
+    </script>
+</body>
+</html>
